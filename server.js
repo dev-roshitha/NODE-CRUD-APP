@@ -22,11 +22,11 @@ app.use(express.json())
 //     resave: false,
 // }))
 
-app.use((req, res, next) => {
-    res.locals.message = req.session.message
-    delete req.session.message
-    next()
-})
+// app.use((req, res, next) => {
+//     res.locals.message = req.session.message
+//     delete req.session.message
+//     next()
+// })
 
 app.set('view engine', 'ejs')
 
