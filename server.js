@@ -34,6 +34,9 @@ app.get('/', (req, res) => {
     res.send("Welcome to NODE JS")
 })
 
+//Routes prefix
+app.use("", require("./routes/routes"))
+
 app.listen(PORT, () => {
     console.log(`Server Running On Port ${PORT}`)
 })
