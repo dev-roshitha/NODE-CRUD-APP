@@ -2,6 +2,8 @@ const express = require('express')
 const mongoose = require('mongoose')
 const app = express()
 
+mongoose.set("strictQuery", false)
+
 mongoose.connect('mongodb+srv://rosh:<password>@simplemern.p6hq46y.mongodb.net/?retryWrites=true&w=majority')
 .then(() => {
     console.log("Database connected Successfully")
