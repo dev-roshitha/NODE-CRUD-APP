@@ -4,7 +4,7 @@ const app = express()
 
 mongoose.set("strictQuery", false)
 
-mongoose.connect('mongodb+srv://rosh:<password>@simplemern.p6hq46y.mongodb.net/?retryWrites=true&w=majority')
+mongoose.connect('mongodb+srv://rosh:rosh123@cluster0.rj7ysis.mongodb.net/?retryWrites=true&w=majority')
 .then(() => {
     console.log("Database connected Successfully")
 }).catch((error)=>{
@@ -14,6 +14,10 @@ mongoose.connect('mongodb+srv://rosh:<password>@simplemern.p6hq46y.mongodb.net/?
 //Routes
 app.get("/", (req, res) => {
     res.send("Welcome to NODE CRUD")
+})
+
+app.get("/product", (req, res) => {
+    console.log(req.body)
 })
 
 app.listen(8080, () => {
