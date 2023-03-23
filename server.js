@@ -1,9 +1,11 @@
 const express = require('express')
 const mongoose = require('mongoose')
+const Product = require("./models/productModel")
 const app = express()
 
-mongoose.set("strictQuery", false)
+app.use(express.json())
 
+mongoose.set("strictQuery", false)
 mongoose.connect('mongodb+srv://rosh:rosh123@cluster0.rj7ysis.mongodb.net/?retryWrites=true&w=majority')
 .then(() => {
     console.log("Database connected Successfully")
@@ -16,8 +18,18 @@ app.get("/", (req, res) => {
     res.send("Welcome to NODE CRUD")
 })
 
-app.get("/product", (req, res) => {
-    console.log(req.body)
+app.post("/product", async(req, res) => {
+    try{
+
+        const product = await Product(req.body)
+        res.status(200).json(product)
+
+    }catch(error){
+        console.log(error)
+        res.status(500).json({
+            message: error.message
+        })
+    }
 })
 
 app.listen(8080, () => {
