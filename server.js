@@ -6,6 +6,8 @@ const app = express()
 app.use(express.json())
 app.use(express.urlencoded({ extended: false }))
 
+app.set("view engine", "ejs")
+
 mongoose.set("strictQuery", false)
 mongoose.connect('mongodb+srv://rosh:rosh123@cluster0.rj7ysis.mongodb.net/?retryWrites=true&w=majority')
 .then(() => {
