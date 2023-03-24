@@ -4,6 +4,7 @@ const Product = require("./models/productModel")
 const app = express()
 
 app.use(express.json())
+app.use(express.urlencoded({ extended: false }))
 
 mongoose.set("strictQuery", false)
 mongoose.connect('mongodb+srv://rosh:rosh123@cluster0.rj7ysis.mongodb.net/?retryWrites=true&w=majority')
@@ -50,6 +51,20 @@ app.put("/products/:id", async(req, res) => {
         }
         const updatedProduct = await Product.findById(id)
         res.status(200).json(updatedProduct)
+
+    } catch (error) {
+        res.status(500).json({message: error.message})
+        console.log(error)
+    }
+})
+
+app.delete("/products/:id", async(req, res) => {
+    try {
+        const {id} = req.params
+        const product = await Product.findByIdAndDelete(id)
+        if(!product){
+            return res.status(404).json({message: `cannot find product with ${id}`})
+        }
 
     } catch (error) {
         res.status(500).json({message: error.message})
