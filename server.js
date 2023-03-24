@@ -8,6 +8,7 @@ app.use(express.urlencoded({ extended: false }))
 
 app.set("view engine", "ejs")
 
+//Set DB Connection
 mongoose.set("strictQuery", false)
 mongoose.connect('mongodb+srv://rosh:rosh123@cluster0.rj7ysis.mongodb.net/?retryWrites=true&w=majority')
 .then(() => {
@@ -16,10 +17,9 @@ mongoose.connect('mongodb+srv://rosh:rosh123@cluster0.rj7ysis.mongodb.net/?retry
     console.log(error)
 })
 
-//Routes
-app.get("/", (req, res) => {
-    res.send("Welcome to NODE CRUD")
-})
+//Routes Prefix
+app.use("", require("./routes/routes"))
+
 
 app.get("/products", async(req, res) => {
     try {
