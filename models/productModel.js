@@ -1,6 +1,6 @@
 const mongoose = require('mongoose')
 
-const productSchema = mongoose.Schema(
+const productSchema = new mongoose.Schema(
     {
         name: {
             type: String,
@@ -17,7 +17,7 @@ const productSchema = mongoose.Schema(
         },
         image: {
             type: String,
-            required: false
+            required: true
         }
     },
     { 
