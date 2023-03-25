@@ -37,8 +37,18 @@ router.post("/add", upload, async(req, res) => {
 })
 
 // Root Route
-router.get("/", (req, res) => {
-    res.render('index', { title: "Home" })
+router.get("/", async(req, res) => {
+    try{
+        const products = await Product.find({})
+        res.render('index', {
+            title: 'Home page',
+            products: products
+        })
+
+    }catch(error){
+        res.status(500).json({message: error.message})
+        console.log(error)
+    }
 })
 
 router.get("/addProduct", (req, res) => {
