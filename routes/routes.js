@@ -8,6 +8,10 @@ router.get("/", (req, res) => {
     res.render('index', { title: "Home" })
 })
 
+router.get("/addProduct", (req, res) => {
+    res.render('addProduct', { title: "Add Product" })
+})
+
 // fetch data from DB GET
 router.get("/products", async(req, res) => {
     try {
