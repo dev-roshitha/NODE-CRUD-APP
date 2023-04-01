@@ -89,6 +89,18 @@ app.use("", require("./routes/routes"))
 //     }
 // })
 
+app.delete("/delete/:id", async(req, res) => {
+    try {
+        const productId = req.params.id
+        await Product.deleteOne(productId)
+        console.log("Product deleted successfully")
+
+    } catch (error) {
+        res.json({message: error.message})
+        console.log(error)
+    }
+})
+
 app.listen(8080, () => {
     console.log(`App running on http://localhost:8080`)
 })

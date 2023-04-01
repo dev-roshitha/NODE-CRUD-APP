@@ -91,24 +91,37 @@ router.post("/update/:id", upload, async(req, res) => {
 })
 
 //Delete Product
-router.get("/delete/:id", async(req, res) => {
-    const id = req.params.id
-    const trashedProduct = await Product.findByIdAndDelete(id)
-    if(trashedProduct.image != ''){
-        try {
-            fs.unlinkSync(`./uploads/`+trashedProduct.image)
-        } catch (error) {
-            console.log(error)
-        }
-    }
+// router.get("/delete/:id", async(req, res) => {
+//     const id = req.params.id
+//     const trashedProduct = await Product.findByIdAndDelete(id)
+//     if(trashedProduct.image != ''){
+//         try {
+//             fs.unlinkSync(`./uploads/`+trashedProduct.image)
+//         } catch (error) {
+//             console.log(error)
+//         }
+//     }
+//     try {
+//         res.redirect("/")
+//         console.log("Product Deleted Successfully")
+//     } catch (error) {
+//         res.json({message: error.message})
+//         console.log(error)
+//     }
+// })
+
+
+router.delete("/delete/:id", async(req, res) => {
     try {
-        res.redirect("/")
-        console.log("Product Deleted Successfully")
+        const productId = req.params.id
+        await Product.deleteOne({_id: productId})
+        console.log("Product deleted successfully")
     } catch (error) {
         res.json({message: error.message})
         console.log(error)
     }
 })
+
 
 // Root Route
 router.get("/", async(req, res) => {
