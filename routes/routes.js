@@ -111,18 +111,6 @@ router.post("/update/:id", upload, async(req, res) => {
 // })
 
 
-router.delete("/delete/:id", async(req, res) => {
-    try {
-        const productId = req.params.id
-        await Product.deleteOne({_id: productId})
-        console.log("Product deleted successfully")
-    } catch (error) {
-        res.json({message: error.message})
-        console.log(error)
-    }
-})
-
-
 // Root Route
 router.get("/", async(req, res) => {
     try{
